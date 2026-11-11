@@ -40,7 +40,7 @@ namespace Notepad
                 // c'è qualcosa da salvare
                 DialogResult rispostaMessageBox = MessageBox.Show(
                         $"Salvare le modifiche a {fileName}?",
-                        "Blocco note",
+                        PROGRAM_NAME_SHORT,
                         MessageBoxButtons.YesNoCancel
                     );
                 switch (rispostaMessageBox)
@@ -61,6 +61,15 @@ namespace Notepad
             fileName = "Senza nome";
             rtbMain.Text = "";
             lastSavedContent = "";
+        }
+
+        private void salvaconnomeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult rispostaDialog = saveFileDialog.ShowDialog();
+            if (rispostaDialog == DialogResult.OK)
+            {
+                MessageBox.Show("Salviamo");
+            }
         }
     }
 }
