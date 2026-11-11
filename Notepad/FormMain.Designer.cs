@@ -171,8 +171,9 @@
             // esciToolStripMenuItem
             // 
             this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
-            this.esciToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.esciToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.esciToolStripMenuItem.Text = "&Esci";
+            this.esciToolStripMenuItem.Click += new System.EventHandler(this.esciToolStripMenuItem_Click);
             // 
             // modificaToolStripMenuItem
             // 
@@ -300,6 +301,7 @@
             this.rtbMain.Size = new System.Drawing.Size(800, 404);
             this.rtbMain.TabIndex = 2;
             this.rtbMain.Text = "";
+            this.rtbMain.TextChanged += new System.EventHandler(this.rtbMain_TextChanged);
             // 
             // nuovafinestraToolStripMenuItem
             // 
