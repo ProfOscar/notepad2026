@@ -20,6 +20,7 @@ namespace Notepad
         string fileName = "Senza nome";
         string lastSavedContent = string.Empty;
         bool isCancelSave = false;
+        bool isCancelOpen = false;
 
         #endregion
 
@@ -61,6 +62,11 @@ namespace Notepad
         private void nuovafinestraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Application.ExecutablePath);
+        }
+
+        private void apriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
