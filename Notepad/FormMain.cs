@@ -18,6 +18,7 @@ namespace Notepad
         string filePath = "";
         string fileName = "Senza nome";
         string lastSavedContent = string.Empty;
+        bool isCancelSave = false;
 
         #endregion
 
@@ -46,8 +47,8 @@ namespace Notepad
                 switch (rispostaMessageBox)
                 {
                     case DialogResult.Yes:
-                        // TODO:: salvo
-                        CreateNew();
+                        salvaToolStripMenuItem_Click(sender, e);
+                        if (!isCancelSave) CreateNew();
                         break;
                     case DialogResult.No:
                         CreateNew();
@@ -66,11 +67,12 @@ namespace Notepad
 
         private void salvaconnomeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            isCancelSave = false;
             DialogResult rispostaDialog = saveFileDialog.ShowDialog();
             if (rispostaDialog == DialogResult.OK)
-            {
                 SaveFile(saveFileDialog.FileName, rtbMain.Text);
-            }
+            else
+                isCancelSave = true;
         }
 
         private void esciToolStripMenuItem_Click(object sender, EventArgs e)
@@ -99,9 +101,11 @@ namespace Notepad
 
         private void CreateNew()
         {
+            filePath = "";
             fileName = "Senza nome";
             rtbMain.Text = "";
             lastSavedContent = "";
+            SetTitle();
         }
 
         private void SaveFile(string file, string content)
