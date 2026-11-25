@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Notepad
@@ -8,6 +9,7 @@ namespace Notepad
         const string PROGRAM_NAME_SHORT = "Blocco note";
         const string PROGRAM_NAME_FULL = "Blocco note di Windows";
 
+        string filePath = "";
         string fileName = "Senza nome";
         string lastSavedContent = string.Empty;
 
@@ -68,8 +70,33 @@ namespace Notepad
             DialogResult rispostaDialog = saveFileDialog.ShowDialog();
             if (rispostaDialog == DialogResult.OK)
             {
-                MessageBox.Show("Salviamo");
+                SalvaFile(saveFileDialog.FileName, rtbMain.Text);
             }
+        }
+
+        private void SalvaFile(string file, string content)
+        {
+            try
+            {
+                File.WriteAllText(file, content);
+                filePath = file;
+                fileName = Path.GetFileName(file);
+                lastSavedContent = content;
+                setTitle();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Salvataggio non riuscito.",
+                    "Salva file", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (filePath != "")
+                SalvaFile(filePath, rtbMain.Text);
+            else
+                salvaconnomeToolStripMenuItem_Click(sender, e);
         }
     }
 }

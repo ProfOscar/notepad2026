@@ -152,6 +152,7 @@
             this.salvaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.salvaToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.salvaToolStripMenuItem.Text = "&Salva";
+            this.salvaToolStripMenuItem.Click += new System.EventHandler(this.salvaToolStripMenuItem_Click);
             // 
             // salvaconnomeToolStripMenuItem
             // 
@@ -460,7 +461,7 @@
             // 
             this.saveFileDialog.DefaultExt = "*.txt";
             this.saveFileDialog.Filter = "Documenti di testo|*.txt|Tutti i file|*.*";
-            this.saveFileDialog.Title = "*.txt";
+            this.saveFileDialog.Title = "Salva con nome";
             // 
             // FormMain
             // 
