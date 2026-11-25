@@ -6,34 +6,32 @@ namespace Notepad
 {
     public partial class FormMain : Form
     {
+        #region costanti
+
         const string PROGRAM_NAME_SHORT = "Blocco note";
         const string PROGRAM_NAME_FULL = "Blocco note di Windows";
+
+        #endregion
+
+        #region variabili
 
         string filePath = "";
         string fileName = "Senza nome";
         string lastSavedContent = string.Empty;
 
+        #endregion
+
+        #region inizializzazioni
+
         public FormMain()
         {
             InitializeComponent();
-            setTitle();
+            SetTitle();
         }
 
-        private void esciToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        #endregion
 
-        private void rtbMain_TextChanged(object sender, EventArgs e)
-        {
-            setTitle();
-        }
-
-        private void setTitle()
-        {
-            string prepend = rtbMain.Text != lastSavedContent ? "*" : "";
-            Text = $"{prepend}{fileName} - {PROGRAM_NAME_FULL}";
-        }
+        #region interazioni_utente
 
         private void nuovoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -49,20 +47,21 @@ namespace Notepad
                 {
                     case DialogResult.Yes:
                         // TODO:: salvo
-                        CreoNuovo();
+                        CreateNew();
                         break;
                     case DialogResult.No:
-                        CreoNuovo();
+                        CreateNew();
                         break;
                 }
             }
         }
-
-        private void CreoNuovo()
+        
+        private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fileName = "Senza nome";
-            rtbMain.Text = "";
-            lastSavedContent = "";
+            if (filePath != "")
+                SaveFile(filePath, rtbMain.Text);
+            else
+                salvaconnomeToolStripMenuItem_Click(sender, e);
         }
 
         private void salvaconnomeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -70,11 +69,42 @@ namespace Notepad
             DialogResult rispostaDialog = saveFileDialog.ShowDialog();
             if (rispostaDialog == DialogResult.OK)
             {
-                SalvaFile(saveFileDialog.FileName, rtbMain.Text);
+                SaveFile(saveFileDialog.FileName, rtbMain.Text);
             }
         }
 
-        private void SalvaFile(string file, string content)
+        private void esciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        #endregion
+
+        #region gestori_evento
+
+        private void rtbMain_TextChanged(object sender, EventArgs e)
+        {
+            SetTitle();
+        }
+
+        #endregion
+
+        #region funzioni_custom
+
+        private void SetTitle()
+        {
+            string prepend = rtbMain.Text != lastSavedContent ? "*" : "";
+            Text = $"{prepend}{fileName} - {PROGRAM_NAME_FULL}";
+        }
+
+        private void CreateNew()
+        {
+            fileName = "Senza nome";
+            rtbMain.Text = "";
+            lastSavedContent = "";
+        }
+
+        private void SaveFile(string file, string content)
         {
             try
             {
@@ -82,7 +112,7 @@ namespace Notepad
                 filePath = file;
                 fileName = Path.GetFileName(file);
                 lastSavedContent = content;
-                setTitle();
+                SetTitle();
             }
             catch (Exception)
             {
@@ -91,12 +121,6 @@ namespace Notepad
             }
         }
 
-        private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (filePath != "")
-                SalvaFile(filePath, rtbMain.Text);
-            else
-                salvaconnomeToolStripMenuItem_Click(sender, e);
-        }
+        #endregion
     }
 }
