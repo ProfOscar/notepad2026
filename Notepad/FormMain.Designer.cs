@@ -129,6 +129,7 @@
             | System.Windows.Forms.Keys.N)));
             this.nuovafinestraToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.nuovafinestraToolStripMenuItem.Text = "Nuova &finestra";
+            this.nuovafinestraToolStripMenuItem.Click += new System.EventHandler(this.nuovafinestraToolStripMenuItem_Click);
             // 
             // apriToolStripMenuItem
             // 

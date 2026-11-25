@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -56,7 +57,12 @@ namespace Notepad
                 }
             }
         }
-        
+
+        private void nuovafinestraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Application.ExecutablePath);
+        }
+
         private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (filePath != "")
