@@ -89,6 +89,31 @@ namespace Notepad
             SetTitle();
         }
 
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (lastSavedContent != rtbMain.Text)
+            {
+                // c'è qualcosa da salvare
+                DialogResult rispostaMessageBox = MessageBox.Show(
+                        $"Salvare le modifiche a {fileName}?",
+                        PROGRAM_NAME_SHORT,
+                        MessageBoxButtons.YesNoCancel
+                    );
+                switch (rispostaMessageBox)
+                {
+                    case DialogResult.Yes:
+                        salvaToolStripMenuItem_Click(sender, e);
+                        if (isCancelSave) e.Cancel = true;
+                        break;
+                    case DialogResult.Cancel:
+                        // annullo la chiusura della form
+                        e.Cancel = true;
+                        break;
+                }
+
+            }
+        }
+
         #endregion
 
         #region funzioni_custom

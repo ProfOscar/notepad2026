@@ -475,6 +475,7 @@
             this.MainMenuStrip = this.menuStripTop;
             this.Name = "FormMain";
             this.Text = "Blocco note di Windows";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.menuStripTop.ResumeLayout(false);
             this.menuStripTop.PerformLayout();
             this.ResumeLayout(false);
